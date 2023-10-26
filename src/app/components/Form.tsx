@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Input } from '@nextui-org/react'
+import Submit from "./Submit";
 
 interface Movie {
   title: string;
@@ -15,6 +16,22 @@ const Form: React.FC<FormProps> = ({ updateMovies }) => {
     title: '',
     date: '',
   })
+
+  const handleMovieChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const title = e.target.value;
+    setFormData((prevData) => ({
+      ...prevData,
+      title: title,
+    }))
+  }
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const date = e.target.value;
+    setFormData((prevData) => ({
+      ...prevData,
+      date: date,
+    }))
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,16 +67,16 @@ const Form: React.FC<FormProps> = ({ updateMovies }) => {
           type='text'
           label='Movie'
           value={formData.title}
-        // onChange={handleMovieChange}
+          onChange={handleMovieChange}
         />
         <Input
           labelPlacement='outside-left'
           type='date'
           label='Date'
           value={formData.date}
-        // onChange={handleDateChange}
+          onChange={handleDateChange}
         />
-        {/* <Submit onSubmit={handleSubmit} /> */}
+        <Submit onSubmit={handleSubmit} />
       </form>
     </div>
   )
