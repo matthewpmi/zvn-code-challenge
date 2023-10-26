@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Input } from '@nextui-org/react'
 
 interface Movie {
-  title: String;
-  date: String;
+  title: string;
+  date: string;
 }
 
 interface FormProps {
@@ -15,6 +15,32 @@ const Form: React.FC<FormProps> = ({ updateMovies }) => {
     title: '',
     date: '',
   })
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/movies', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const newMovie = { title: formData.title, date: formData.date };
+        updateMovies(newMovie);
+        setFormData({
+          title: '',
+          date: '',
+        });
+      } else {
+        console.error('Failed to add movie');
+      }
+    } catch (error) {
+      console.error('Error adding movie', error);
+    }
+  }
 
   return (
     <div className='flex flex-col items-center p-6'>
