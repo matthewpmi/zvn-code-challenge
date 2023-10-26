@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
+import Form from "./components/Form";
 
 interface Movie {
   title: string;
@@ -33,8 +34,11 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-
+    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
+      <p className='m-12'>Add movies and the dates you watched them!</p>
+      <div>
+        <Form />
+      </div>
     </main>
   )
 }
