@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react";
 import Form from "./components/Form";
+import MovieCard from "./components/MovieCard";
 
 interface Movie {
   title: string;
@@ -43,6 +44,15 @@ export default function Home() {
       <div>
         <Form updateMovies={updateMovies} />
       </div>
+      {movies.length > 0 ? (
+        <div>
+          {movies.map((movie, index) => (
+            <MovieCard key={index} title={movie.title} date={movie.date} />
+          ))}
+        </div>
+      ) : (
+        <p>No movies added.</p>
+      )}
     </main>
   )
 }
