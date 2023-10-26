@@ -4,10 +4,12 @@ interface MovieCardProps {
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ title, date }) => {
+
+  const formattedDate = new Date(date).toLocaleDateString();
   return (
     <div>
       <p>Movie: {title}</p>
-      <p>Date: {date}</p>
+      <p>Watched: {formattedDate}</p>
     </div>
   )
 }
